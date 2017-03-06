@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F821EA851E5977490093A9DB /* City.csv in Resources */ = {isa = PBXBuildFile; fileRef = F821EA841E5977490093A9DB /* City.csv */; };
+		F8452B4E1E61B4EA0082EF32 /* CityLoadFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8452B4D1E61B4EA0082EF32 /* CityLoadFile.swift */; };
 		F8B3F5AB1E533D2F00B6C688 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B3F5AA1E533D2F00B6C688 /* AppDelegate.swift */; };
 		F8B3F5AD1E533D2F00B6C688 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B3F5AC1E533D2F00B6C688 /* ViewController.swift */; };
 		F8B3F5B01E533D2F00B6C688 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8B3F5AE1E533D2F00B6C688 /* Main.storyboard */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F821EA841E5977490093A9DB /* City.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = City.csv; sourceTree = "<group>"; };
+		F8452B4D1E61B4EA0082EF32 /* CityLoadFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityLoadFile.swift; sourceTree = "<group>"; };
 		F8B3F5A71E533D2F00B6C688 /* 20170310_Weatherapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 20170310_Weatherapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8B3F5AA1E533D2F00B6C688 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8B3F5AC1E533D2F00B6C688 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 				F8B3F5B11E533D2F00B6C688 /* Assets.xcassets */,
 				F8B3F5B31E533D2F00B6C688 /* LaunchScreen.storyboard */,
 				F8B3F5B61E533D2F00B6C688 /* Info.plist */,
+				F8452B4D1E61B4EA0082EF32 /* CityLoadFile.swift */,
+				F821EA841E5977490093A9DB /* City.csv */,
 			);
 			path = 20170310_Weatherapp;
 			sourceTree = "<group>";
@@ -235,6 +241,7 @@
 				F8B3F5B51E533D2F00B6C688 /* LaunchScreen.storyboard in Resources */,
 				F8B3F5B21E533D2F00B6C688 /* Assets.xcassets in Resources */,
 				F8B3F5B01E533D2F00B6C688 /* Main.storyboard in Resources */,
+				F821EA851E5977490093A9DB /* City.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +268,7 @@
 			files = (
 				F8B3F5AD1E533D2F00B6C688 /* ViewController.swift in Sources */,
 				F8B3F5AB1E533D2F00B6C688 /* AppDelegate.swift in Sources */,
+				F8452B4E1E61B4EA0082EF32 /* CityLoadFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

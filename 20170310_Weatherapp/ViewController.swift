@@ -27,7 +27,10 @@ class ViewController: UIViewController,UISearchBarDelegate {
 
     @IBOutlet weak var searchCity: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-
+    
+    //都市のリスト（タプル配列）
+//    var CityList : [(date:String, city:String, title:String, text:String, image:String)] = []
+    
     //サーチボタンクリック時
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         //キーボードを閉じる
@@ -36,65 +39,73 @@ class ViewController: UIViewController,UISearchBarDelegate {
         print(searchBar.text!)
         
         if let searchWord = searchBar.text {
+            //入力されたら都市を検索
             searchCity(keyword: searchWord)
         }
     }
     
     //SearchCityメソッド
-    //第一引数:keyword 検索したいワード
     func searchCity(keyword : String){
         
-        //都市の検索キーワードをURLエンコードする
-        let keyword_encode = keyword.addingPercentEncoding(withAllowedCharacters : CharacterSet.urlQueryAllowed)
-        
-        //URLオブジェクトの生成 140010は横浜
-        let url = URL(string: "http://weather.livedoor.com/forecast/webservice/json/v1?city=\(keyword_encode!)")
-    
-        print(url!)
+        var csvArray:[String] = []
 
-        //リクエストオブジェクトの生成
-        let req = URLRequest(url:url!)
+        //CSVファイルのパスを取得する
+        let csvPath = Bundle.main.path(forResource: "City", ofType: "csv")
         
-        //セッションの接続をカスタマイズできる
-        //タイムアウト値、キャッシュポリシーなどが指定できる今回はデフォルト値を使用
-        let configuration = URLSessionConfiguration.default
+        //CSVファイルのデータを取得する
+        let csvData = try? NSString(contentsOfFile:csvPath!, encoding:String.Encoding.utf8.rawValue)
         
-        //セッション情報を取り出し
-        let session = URLSession(configuration: configuration, delegate: nil, delegateQueue: OperationQueue.main)
+        //カンマ区切りでデータを分割して配列に格納する
+        csvArray = (csvData?.components(separatedBy: ","))!
+//        csvArray = (csvData?.components(separatedBy: "\n"))!
+        print(csvArray)
         
-        //リクエストをタスクとして登録
-        let task = session.dataTask(with: req, completionHandler: {
-            (data, request , error) in
+        do{
+//            検索文字とcsvファイルの1列目が該当するか確認を繰り返す
+            for i in 0...3 where csvArray[i] == searchCity.text {
+//                var Secondretsume:String = csvPath! [i][1]
+                let ID : Int = i + 1
+                let url  = URL(string: "http://weather.livedoor.com/forecast/webservice/json/v1?city=\(csvArray[ID])")
+                print(url)
+                }
+
             
-            //do tra catch エラーハンドリング
-            do {
+            //情報取得できているか確認
+            if let items = json["item"] as? [[String:Any]]{
+                //取得している都市の数だけ処理
+                for item in item {
+                    //日付
+                    guard let date = item["date"] as? String else{
+                        continue
+                    }
+                    //都市
+                    guard let city = item["city"] as? String else {
+                        continue
+                    }
+                    //天気（晴れ、曇り、雨など）
+                    guard let title = item["title"] as? String else {
+                        continue
+                    }
+                    //天気アイコンのURL
+                    guard let image = item["image"] as? String else{
+                        continue
+                    }
+                    //1つの天気情報をタプルでまとめて管理
+                    let tenki = (date,city,title,image)
+                    //天気の配列へ追加
+                    self.CityList
+                    
+                }
                 
-                //受け取ったJSONデータをバース（解析）して格納
-                let json = try JSONSerialization.jsonObject(with: data!) as! [String:Any]
                 
-                print("count =  \(json["count"])")
+//            }
             } catch {
                 //エラー処理
-                print("エラーが出ました")
+                print("エラー")
             }
-        })
-        //ダウンロード開始
-        task.resume()
+            //ダウンロード開始
+            task.resume()
+        }
     }
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
